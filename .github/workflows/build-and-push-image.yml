@@ -1,0 +1,70 @@
+---
+name: Build and Push Toolbox Image
+
+on:
+  push:
+    paths:
+      - 'Containerfile'
+      - 'files/**'
+  schedule:
+    - cron: "22 22 * * */7"
+
+env:
+  IMAGE_REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ${{ env.IMAGE_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get Image version
+        id: get-image-version
+        run: |
+          VERSION=$(date +'%y.%U')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Build and Push Toolbox image
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: ${{ env.IMAGE_NAME }}
+          containerfiles: |
+            ./Containerfile
+          tags: latest ${{ env.VERSION }}
+          build-args: |
+            VERSION=${{ env.VERSION }}
+          extra-args: |
+            --squash
+
+      - name: Push to Github Container Registry
+        id: push-to-registry
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          registry: ${{ env.IMAGE_REGISTRY }}
+          tags: ${{ steps.build-image.outputs.tags }}
+
+      - name: Generate artifact attestation
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
+        continue-on-error: true
