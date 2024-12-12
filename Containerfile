@@ -45,6 +45,7 @@ COPY files/vscode.repo /etc/yum.repos.d/
 #              pwgen - generating passwords
 # python3-lsp-server - python LSP implementation for helix
 #                rcm - managing dotfiles
+#              rsync - remote copy tool
 #               tmux - managing screen sessions
 #
 RUN dnf install -y bind-utils code diffutils direnv helix make man-db pass pinentry poetry pre-commit pwgen \
