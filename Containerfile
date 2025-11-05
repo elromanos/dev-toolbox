@@ -1,9 +1,9 @@
-FROM registry.fedoraproject.org/fedora:41
+FROM registry.fedoraproject.org/fedora:43
 
 # Set build-time arguments with default values
 ARG NAME=dev-toolbox
 ARG VENDOR="elromanos"
-ARG VERSION=41
+ARG VERSION=43
 
 # Set environment variables, falling back to ARGs for default values
 ENV NAME=${NAME} \
