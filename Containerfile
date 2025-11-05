@@ -35,7 +35,6 @@ COPY files/vscode.repo /etc/yum.repos.d/
 #               code - VS Code
 #          diffutils - diff tools
 #             direnv - for managing dev environment variables
-#              helix - modern text editor
 #               make - for running make tasks
 #             man-db - access to man pages
 #               pass - managing passwords
@@ -43,11 +42,10 @@ COPY files/vscode.repo /etc/yum.repos.d/
 #             poetry - managing Python projects
 #         pre-commit - running pre-commit tasks
 #              pwgen - generating passwords
-# python3-lsp-server - python LSP implementation for helix
 #                rcm - managing dotfiles
 #              rsync - remote copy tool
 #               tmux - managing screen sessions
 #
-RUN dnf install -y bind-utils code diffutils direnv helix make man-db pass pinentry poetry pre-commit pwgen \
-                   python3-lsp-server rcm tmux && \
+RUN dnf install -y bind-utils code diffutils direnv make man-db pass pinentry poetry pre-commit pwgen \
+                   rcm tmux && \
     dnf clean all
