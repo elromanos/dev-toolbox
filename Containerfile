@@ -39,12 +39,12 @@ COPY files/vscode.repo /etc/yum.repos.d/
 #             man-db - access to man pages
 #               pass - managing passwords
 #           pinentry - passing passphrases to GPG
-#             poetry - managing Python projects
 #         pre-commit - running pre-commit tasks
 #              pwgen - generating passwords
 #                rcm - managing dotfiles
 #               tmux - managing screen sessions
+#                 uv - managing Python projects
 #
-RUN dnf install -y bind-utils code diffutils direnv make man-db pass pinentry poetry pre-commit pwgen \
-                   rcm tmux && \
+RUN dnf install -y bind-utils code diffutils direnv make man-db pass pinentry pre-commit pwgen \
+                   rcm tmux uv && \
     dnf clean all
