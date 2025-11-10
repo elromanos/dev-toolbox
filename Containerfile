@@ -35,6 +35,7 @@ COPY files/vscode.repo /etc/yum.repos.d/
 #               code - VS Code
 #          diffutils - diff tools
 #             direnv - for managing dev environment variables
+#            iputils - network monitoring tools
 #               make - for running make tasks
 #             man-db - access to man pages
 #               pass - managing passwords
@@ -45,6 +46,6 @@ COPY files/vscode.repo /etc/yum.repos.d/
 #               tmux - managing screen sessions
 #                 uv - managing Python projects
 #
-RUN dnf install -y bind-utils code diffutils direnv make man-db pass pinentry pre-commit pwgen \
+RUN dnf install -y bind-utils code diffutils direnv iputils make man-db pass pinentry pre-commit pwgen \
                    rcm tmux uv && \
     dnf clean all
