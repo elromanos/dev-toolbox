@@ -43,9 +43,10 @@ COPY files/vscode.repo /etc/yum.repos.d/
 #         pre-commit - running pre-commit tasks
 #              pwgen - generating passwords
 #                rcm - managing dotfiles
+#              timew - Time tracking utility
 #               tmux - managing screen sessions
 #                 uv - managing Python projects
 #
 RUN dnf install -y bind-utils code diffutils direnv iputils make man-db pass pinentry pre-commit pwgen \
-                   rcm tmux uv && \
+                   rcm timew tmux uv && \
     dnf clean all
