@@ -25,14 +25,9 @@ LABEL com.github.containers.toolbox="true" \
 # Copy required files
 COPY files/dnf.conf /etc/dnf/dnf.conf
 
-# Setup the VS Code YUM repository
-RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc
-COPY files/vscode.repo /etc/yum.repos.d/
-
 # Install required packages
 #
 #         bind-utils - for basic DNS troubleshooting
-#               code - VS Code
 #          diffutils - diff tools
 #             direnv - for managing dev environment variables
 #            iputils - network monitoring tools
@@ -47,6 +42,6 @@ COPY files/vscode.repo /etc/yum.repos.d/
 #               tmux - managing screen sessions
 #                 uv - managing Python projects
 #
-RUN dnf install -y bind-utils code diffutils direnv iputils make man-db pass pinentry pre-commit pwgen \
+RUN dnf install -y bind-utils diffutils direnv iputils make man-db pass pinentry pre-commit pwgen \
                    rcm timew tmux uv && \
     dnf clean all
