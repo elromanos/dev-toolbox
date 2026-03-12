@@ -38,10 +38,11 @@ COPY files/dnf.conf /etc/dnf/dnf.conf
 #         pre-commit - running pre-commit tasks
 #              pwgen - generating passwords
 #                rcm - managing dotfiles
+#              rsync - remote copy tool
 #              timew - Time tracking utility
 #               tmux - managing screen sessions
 #                 uv - managing Python projects
 #
 RUN dnf install -y bind-utils diffutils direnv iputils make man-db pass pinentry pre-commit pwgen \
-                   rcm timew tmux uv && \
+                   rcm rsync timew tmux uv && \
     dnf clean all
