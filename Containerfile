@@ -34,6 +34,7 @@ COPY files/dnf.conf /etc/dnf/dnf.conf
 #               make - for running make tasks
 #             man-db - access to man pages
 #               pass - managing passwords
+#           pass-otp - A pass extension for managing one-time-password tokens
 #           pinentry - passing passphrases to GPG
 #         pre-commit - running pre-commit tasks
 #              pwgen - generating passwords
@@ -42,6 +43,6 @@ COPY files/dnf.conf /etc/dnf/dnf.conf
 #               tmux - managing screen sessions
 #                 uv - managing Python projects
 #
-RUN dnf install -y bind-utils diffutils direnv iputils make man-db pass pinentry pre-commit pwgen \
-                   rcm rsync tmux uv && \
+RUN dnf install -y bind-utils diffutils direnv iputils make man-db pass pass-otp pinentry \
+                   pre-commit pwgen rcm rsync tmux uv && \
     dnf clean all
